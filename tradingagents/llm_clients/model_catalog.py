@@ -65,6 +65,20 @@ MODEL_OPTIONS: ProviderModeOptions = {
     },
     # OpenRouter models are fetched dynamically at CLI runtime.
     # No static entries needed; any model ID is accepted by the validator.
+    "mlx": {
+        "quick": [
+            ("Gemma 4 E2B 4bit (fastest, smallest)", "gemma-4-e2b-it-4bit"),
+            ("Gemma 4 E4B 8bit", "gemma-4-e4b-it-8bit"),
+            ("Gemma 4 26B 4bit", "gemma-4-26b-a4b-it-4bit"),
+            ("Gemma 4 31B 4bit", "gemma-4-31b-it-4bit"),
+        ],
+        "deep": [
+            ("Gemma 4 31B 4bit (largest)", "gemma-4-31b-it-4bit"),
+            ("Gemma 4 26B 4bit", "gemma-4-26b-a4b-it-4bit"),
+            ("Gemma 4 E4B 8bit", "gemma-4-e4b-it-8bit"),
+            ("Gemma 4 E2B 4bit", "gemma-4-e2b-it-4bit"),
+        ],
+    },
     "ollama": {
         "quick": [
             ("Qwen3:latest (8B, local)", "qwen3:latest"),

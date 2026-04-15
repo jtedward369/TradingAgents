@@ -29,6 +29,13 @@ _PROVIDER_CONFIG = {
     "xai": ("https://api.x.ai/v1", "XAI_API_KEY"),
     "openrouter": ("https://openrouter.ai/api/v1", "OPENROUTER_API_KEY"),
     "ollama": ("http://localhost:11434/v1", None),
+    "mlx": ("http://localhost:8000/v1", None),
+}
+
+# Hardcoded API keys for providers that don't use env vars
+_PROVIDER_HARDCODED_KEYS = {
+    "ollama": "ollama",
+    "mlx": "1234",
 }
 
 
@@ -65,7 +72,7 @@ class OpenAIClient(BaseLLMClient):
                 if api_key:
                     llm_kwargs["api_key"] = api_key
             else:
-                llm_kwargs["api_key"] = "ollama"
+                llm_kwargs["api_key"] = _PROVIDER_HARDCODED_KEYS.get(self.provider, "no-key")
         elif self.base_url:
             llm_kwargs["base_url"] = self.base_url
 

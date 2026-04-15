@@ -174,6 +174,24 @@ def select_openrouter_model() -> str:
     return choice
 
 
+def select_mlx_model(role: str) -> str:
+    """Prompt for a free-text MLX model name."""
+    model = questionary.text(
+        f"Enter MLX model name for [{role}] (e.g. mlx-community/Qwen3-8B-4bit):",
+        validate=lambda x: len(x.strip()) > 0 or "Please enter a model name.",
+        style=questionary.Style([
+            ("text", "fg:cyan"),
+            ("highlighted", "noinherit"),
+        ]),
+    ).ask()
+
+    if not model:
+        console.print(f"\n[red]No MLX model entered for {role}. Exiting...[/red]")
+        exit(1)
+
+    return model.strip()
+
+
 def select_shallow_thinking_agent(provider) -> str:
     """Select shallow thinking llm engine using an interactive selection."""
 
@@ -242,6 +260,7 @@ def select_llm_provider() -> tuple[str, str | None]:
         ("xAI", "https://api.x.ai/v1"),
         ("Openrouter", "https://openrouter.ai/api/v1"),
         ("Ollama", "http://localhost:11434/v1"),
+        ("MLX", "http://localhost:8000/v1"),
     ]
     
     choice = questionary.select(
